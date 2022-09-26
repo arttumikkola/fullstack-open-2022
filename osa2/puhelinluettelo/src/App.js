@@ -61,14 +61,9 @@ const App = () => {
         onNumberChange={handleNumberChange}
       />
       <h2>Numbers</h2>
-      <Persons personsToShow={personsToShow} person={persons} />
-      {/*  <div>
-          {personsToShow.map((person) => (
-            <p key={person.id}>
-              {person.name} {person.number}
-            </p>
-          ))}
-        </div> */}
+      {personsToShow.map((person) => (
+        <Person person={person} />
+      ))}
     </div>
   );
 };
