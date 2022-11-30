@@ -2,25 +2,23 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 
 const Country = ({ filteredCountries }) => {
-  if (filteredCountries.length === 1) {
-    return (
-      <div>
-        <h1> {filteredCountries[0].name.common} </h1>
-        <p>capital: {filteredCountries[0].capital} </p>
-        <p>area: {filteredCountries[0].area} </p>
-        <b>languages:</b>
-        <ul>
-          {Object.values(filteredCountries[0].languages).map((value, index) => {
-            return <li key={index}>{value}</li>;
-          })}
-        </ul>
-        <img src={filteredCountries[0].flags.svg} alt="flag" width="200"></img>
-        <p>temperature: {/* weather.main.temp */} </p>
-        <h1>Weather in {filteredCountries[0].capital}</h1>
-        <p>wind: {/* {weather.main.wind} */} </p>
-      </div>
-    );
-  }
+  return (
+    <div>
+      <h1> {filteredCountries[0].name.common} </h1>
+      <p>capital: {filteredCountries[0].capital} </p>
+      <p>area: {filteredCountries[0].area} </p>
+      <b>languages:</b>
+      <ul>
+        {Object.values(filteredCountries[0].languages).map((value, index) => {
+          return <li key={index}>{value}</li>;
+        })}
+      </ul>
+      <img src={filteredCountries[0].flags.svg} alt="flag" width="200"></img>
+      <p>temperature: {/* weather.main.temp */} </p>
+      <h1>Weather in {filteredCountries[0].capital}</h1>
+      <p>wind: {/* {weather.main.wind} */} </p>
+    </div>
+  );
 };
 
 const CountriesToShow = ({ input, filteredCountries, setInput, countries }) => {
@@ -55,10 +53,12 @@ const App = () => {
       setCountries(data);
     };
     fetch();
-  }, []);
+  }, [countries]);
 
   useEffect(() => {
-    const filter = countries.filter((country) => country.includes(input));
+    const filter = countries.filter((country) =>
+      country.name.common.includes(input)
+    );
     setFilteredCountries(filter);
   }, [countries, input]);
 
